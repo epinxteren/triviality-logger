@@ -396,7 +396,7 @@ ContainerFactory
 
 ```bash
 ./node_modules/.bin/ts-node example/defaultLoggerModule.ts 
-12/27/2018 12:01:33 PM : Hallo Jane
+12/27/2018 5:06:28 PM : Hallo Jane
 ```
         
 
