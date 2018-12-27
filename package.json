@@ -1,7 +1,7 @@
 {
   "name": "triviality-logger",
   "private": false,
-  "version": "0.1.0",
+§  "version": "0.1.1",
   "description": "Typescript loggers with an interface that support composition",
   "main": "build",
   "types": "build",
@@ -19,7 +19,7 @@
     "jest-badges": "yarn jest-coverage && jest-coverage-badges",
     "create-container-types": "ts-node src/cli/createContainerTypes.ts",
     "create-docs": "ts-node docs/build.ts",
-    "copy-config-files": "yarn cpy '(package.json|README.md|.npmignore|assets)' build/. && cp tsconfig.build.json build/tsconfig.json && cp -r src build/."
+    "copy-config-files": "yarn cpy '(package.json|README.md|LICENSE|.npmignore|assets)' build/. && cp tsconfig.build.json build/tsconfig.json && cp -r src build/."
   },
   "repository": {
     "type": "git",
