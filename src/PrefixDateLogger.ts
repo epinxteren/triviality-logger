@@ -1,12 +1,12 @@
 import { LoggerInterface, LogLevel } from './LoggerInterface';
 import { AbstractLogLevelLogger } from './AbstractLogLevelLogger';
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 
 export class PrefixDateLogger extends AbstractLogLevelLogger implements LoggerInterface {
 
   constructor(private readonly logger: LoggerInterface,
               private readonly format: string = 'L LTS',
-              private readonly now: () => Date = () => new Date()) {
+              private readonly now: () => Moment = () => moment()) {
     super();
   }
 
@@ -15,7 +15,7 @@ export class PrefixDateLogger extends AbstractLogLevelLogger implements LoggerIn
   }
 
   private formatDate(): string {
-    return moment(this.now()).format(this.format);
+    return this.now().format(this.format);
   }
 
 }
