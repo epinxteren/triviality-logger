@@ -76,8 +76,8 @@ export interface LoggerInterface {
 
 
 ```typescript
-import { ConsoleLogger } from 'triviality-commander';
-import { LogLevel } from 'triviality-commander';
+import { ConsoleLogger } from 'triviality-logger';
+import { LogLevel } from 'triviality-logger';
 
 const logger = new ConsoleLogger(console);
 logger.log(LogLevel.info, 'Hallo', 'World');
@@ -97,7 +97,7 @@ Hallo World
 
 
 ```typescript
-import { ConsoleLogger } from 'triviality-commander';
+import { ConsoleLogger } from 'triviality-logger';
 
 const logger = new ConsoleLogger(console);
 logger.info('Hallo', 'World');
@@ -117,7 +117,7 @@ Bye World
 
 
 ```typescript
-import { ProcessLogger } from 'triviality-commander';
+import { ProcessLogger } from 'triviality-logger';
 
 const logger = new ProcessLogger(process);
 logger.info('Hallo', 'World');
@@ -135,11 +135,11 @@ Hallo World
 
 
 ```typescript
-import { ConsoleLogger } from 'triviality-commander';
-import { PrefixLogger } from 'triviality-commander';
+import { ConsoleLogger } from 'triviality-logger';
+import { PrefixLogger } from 'triviality-logger';
 
 const logger = new ConsoleLogger(console);
-const withPrefix = new PrefixLogger(logger, 'Hallo:');
+const withPrefix = new PrefixLogger(logger, 'Hallo: ');
 withPrefix.info('World');
 ```
         
@@ -147,7 +147,7 @@ withPrefix.info('World');
 
 ```bash
 ./node_modules/.bin/ts-node example/prefixLogger.ts 
-Hallo:World
+Hallo: World
 ```
         
 
@@ -155,9 +155,9 @@ Hallo:World
 
 
 ```typescript
-import { ConsoleLogger } from 'triviality-commander';
-import { FromLogLevelLogger } from 'triviality-commander';
-import { LogLevel } from 'triviality-commander';
+import { ConsoleLogger } from 'triviality-logger';
+import { FromLogLevelLogger } from 'triviality-logger';
+import { LogLevel } from 'triviality-logger';
 
 const logger = new ConsoleLogger(console);
 const witPrefix = new FromLogLevelLogger(logger, LogLevel.info);
@@ -179,7 +179,7 @@ With this you can also wrap [node-bunyan](https://github.com/trentm/node-bunyan)
 
 
 ```typescript
-import { TsLogLogger } from 'triviality-commander';
+import { TsLogLogger } from 'triviality-logger';
 import { Logger } from 'ts-log';
 
 const tsLogger: Logger = console;
@@ -199,7 +199,7 @@ Hallo World
 
 
 ```typescript
-import { NullLogger } from 'triviality-commander';
+import { NullLogger } from 'triviality-logger';
 
 const logger = new NullLogger();
 logger.info('Hallo', 'Void');
@@ -212,14 +212,14 @@ Combine loggers into a single one.
 
 
 ```typescript
-import { CollectionLogger } from 'triviality-commander';
-import { ConsoleLogger } from 'triviality-commander';
-import { PrefixLogger } from 'triviality-commander';
+import { CollectionLogger } from 'triviality-logger';
+import { ConsoleLogger } from 'triviality-logger';
+import { PrefixLogger } from 'triviality-logger';
 
 const consoleLogger = new ConsoleLogger(console);
 const logger = new CollectionLogger([
-  new PrefixLogger(consoleLogger, 'Hallo'),
-  new PrefixLogger(consoleLogger, 'Bye'),
+  new PrefixLogger(consoleLogger, 'Hallo '),
+  new PrefixLogger(consoleLogger, 'Bye '),
 ]);
 logger.info('World');
 ```
@@ -228,8 +228,8 @@ logger.info('World');
 
 ```bash
 ./node_modules/.bin/ts-node example/collectionLogger.ts 
-HalloWorld
-ByeWorld
+Hallo World
+Bye World
 ```
         
 
@@ -360,7 +360,7 @@ For example you reference the logger module like:
 
 ```typescript
 import { Container, Module } from 'triviality';
-import { LoggerModule } from 'triviality-commander';
+import { LoggerModule } from 'triviality-logger';
 import { HalloService } from './HalloService';
 
 export class MyModule implements Module {
@@ -382,7 +382,7 @@ And build the container like:
 
 ```typescript
 import { ContainerFactory } from 'triviality';
-import { DefaultLoggerModule } from 'triviality-commander';
+import { DefaultLoggerModule } from 'triviality-logger';
 import { MyModule } from './Module/MyModule';
 
 ContainerFactory
@@ -399,7 +399,7 @@ ContainerFactory
 
 ```bash
 ./node_modules/.bin/ts-node example/defaultLoggerModule.ts 
-01/03/2019 8:26:58 PM:Hallo Jane
+01/03/2019 8:36:21 PM:Hallo Jane
 ```
         
 

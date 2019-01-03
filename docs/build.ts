@@ -13,7 +13,7 @@ markdownInclude.registerPlugin({
     const file = matches[1];
     const data = fs.readFileSync(file).toString();
     const result = data
-      .replace(/'.*src.*'/gm, '\'triviality-commander\'')
+      .replace(/'.*src.*'/gm, '\'triviality-logger\'')
       .replace(/\.\/Example/gm, './docs/Example')
       .trim();
     return `
