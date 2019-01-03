@@ -13,8 +13,8 @@ export class PrefixLogger extends AbstractLogLevelLogger implements LoggerInterf
     super();
   }
 
-  public log(level: LogLevel, ...message: any[]) {
-    this.logger.log.apply(this.logger, [level, this.prefix, ...message]);
+  public log(level: LogLevel, message?: any, ...optionalParams: any[]) {
+    this.logger.log(level, this.prefix + message, ...optionalParams);
   }
 
 }

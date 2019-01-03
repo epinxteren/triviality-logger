@@ -61,13 +61,13 @@ export enum LogLevel {
 }
 
 export interface LoggerInterface {
-  trace(...message: any[]): void;
-  debug(...message: any[]): void;
-  info(...message: any[]): void;
-  warn(...message: any[]): void;
-  error(...message: any[]): void;
+  trace(message?: any, ...optionalParams: any[]): void;
+  debug(message?: any, ...optionalParams: any[]): void;
+  info(message?: any, ...optionalParams: any[]): void;
+  warn(message?: any, ...optionalParams: any[]): void;
+  error(message?: any, ...optionalParams: any[]): void;
 
-  log(level: LogLevel, ...message: any[]): void;
+  log(level: LogLevel, message: any, ...optionalParams: any[]): void;
 }
 ```
         
@@ -101,6 +101,7 @@ import { ConsoleLogger } from 'triviality-commander';
 
 const logger = new ConsoleLogger(console);
 logger.info('Hallo', 'World');
+logger.info('Bye %s', 'World');
 ```
         
 
@@ -108,6 +109,7 @@ logger.info('Hallo', 'World');
 ```bash
 ./node_modules/.bin/ts-node example/consoleLogger.ts 
 Hallo World
+Bye World
 ```
         
 
@@ -145,7 +147,7 @@ withPrefix.info('World');
 
 ```bash
 ./node_modules/.bin/ts-node example/prefixLogger.ts 
-Hallo: World
+Hallo:World
 ```
         
 
@@ -226,8 +228,8 @@ logger.info('World');
 
 ```bash
 ./node_modules/.bin/ts-node example/collectionLogger.ts 
-Hallo World
-Bye World
+HalloWorld
+ByeWorld
 ```
         
 
@@ -240,27 +242,27 @@ You can extends one of the abstract logger, so you only need to implement some o
 import { LoggerInterface, LogLevel } from './LoggerInterface';
 
 export abstract class AbstractLogLevelLogger implements LoggerInterface {
-  public trace(...message: any[]): void {
-    this.log(LogLevel.trace, ...message);
+  public trace(message?: any, ...optionalParams: any[]): void {
+    this.log(LogLevel.trace, message, ...optionalParams);
   }
 
-  public debug(...message: any[]): void {
-    this.log(LogLevel.debug, ...message);
+  public debug(message?: any, ...optionalParams: any[]): void {
+    this.log(LogLevel.debug, message, ...optionalParams);
   }
 
-  public info(...message: any[]): void {
-    this.log(LogLevel.info, ...message);
+  public info(message?: any, ...optionalParams: any[]): void {
+    this.log(LogLevel.info, message, ...optionalParams);
   }
 
-  public warn(...message: any[]): void {
-    this.log(LogLevel.warn, ...message);
+  public warn(message?: any, ...optionalParams: any[]): void {
+    this.log(LogLevel.warn, message, ...optionalParams);
   }
 
-  public error(...message: any[]): void {
-    this.log(LogLevel.error, ...message);
+  public error(message?: any, ...optionalParams: any[]): void {
+    this.log(LogLevel.error, message, ...optionalParams);
   }
 
-  public abstract log(type: LogLevel, ...message: any[]): void;
+  public abstract log(type: LogLevel, message?: any, ...optionalParams: any[]): void;
 
 }
 ```
@@ -271,28 +273,29 @@ export abstract class AbstractLogLevelLogger implements LoggerInterface {
 import { LoggerInterface, LogLevel } from './LoggerInterface';
 
 export abstract class AbstractFunctionLogger implements LoggerInterface {
-  public abstract trace(...message: any[]): void;
-  public abstract debug(...message: any[]): void;
-  public abstract info(...message: any[]): void;
-  public abstract warn(...message: any[]): void;
-  public abstract error(...message: any[]): void;
 
-  public log(level: LogLevel, ...message: any[]): void {
+  public abstract trace(message?: any, ...optionalParams: any[]): void;
+  public abstract debug(message?: any, ...optionalParams: any[]): void;
+  public abstract info(message?: any, ...optionalParams: any[]): void;
+  public abstract warn(message?: any, ...optionalParams: any[]): void;
+  public abstract error(message?: any, ...optionalParams: any[]): void;
+
+  public log(level: LogLevel, message?: any, ...optionalParams: any[]): void {
     switch (level) {
       case LogLevel.trace:
-        this.trace(...message);
+        this.trace(message, ...optionalParams);
         break;
       case LogLevel.debug:
-        this.debug(...message);
+        this.debug(message, ...optionalParams);
         break;
       case LogLevel.info:
-        this.info(...message);
+        this.info(message, ...optionalParams);
         break;
       case LogLevel.warn:
-        this.warn(...message);
+        this.warn(message, ...optionalParams);
         break;
       case LogLevel.error:
-        this.error(...message);
+        this.error(message, ...optionalParams);
         break;
       default:
         throw new Error(`Log level "${level}" not supported`);
@@ -396,7 +399,7 @@ ContainerFactory
 
 ```bash
 ./node_modules/.bin/ts-node example/defaultLoggerModule.ts 
-12/27/2018 5:48:18 PM : Hallo Jane
+01/03/2019 8:25:07 PM:Hallo Jane
 ```
         
 

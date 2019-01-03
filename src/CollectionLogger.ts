@@ -7,9 +7,9 @@ export class CollectionLogger extends AbstractLogLevelLogger implements LoggerIn
     super();
   }
 
-  public log(type: LogLevel, ...message: any[]): void {
+  public log(type: LogLevel, message: any, ...optionalParams: any[]): void {
     for (const logger of this.loggers) {
-      logger.log(type, ...message);
+      logger.log(type, message, ...optionalParams);
     }
   }
 

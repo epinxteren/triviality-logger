@@ -23,3 +23,16 @@ it('From level logger', () => {
   expect(testLogger.error).toBeCalledWith('test error');
 
 });
+
+it('Should pass optionalParams', () => {
+
+  const testLogger = new JestTestLogger();
+  const logger = new FromLogLevelLogger(testLogger, LogLevel.warn);
+
+  logger.warn('test warn', 1);
+  expect(testLogger.warn).toBeCalledWith('test warn', 1);
+
+  logger.error('test error', 2);
+  expect(testLogger.error).toBeCalledWith('test error', 2);
+
+});

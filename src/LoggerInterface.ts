@@ -1,3 +1,4 @@
+
 export enum LogLevel {
   trace,
   debug,
@@ -7,11 +8,11 @@ export enum LogLevel {
 }
 
 export interface LoggerInterface {
-  trace(...message: any[]): void;
-  debug(...message: any[]): void;
-  info(...message: any[]): void;
-  warn(...message: any[]): void;
-  error(...message: any[]): void;
+  trace(message?: any, ...optionalParams: any[]): void;
+  debug(message?: any, ...optionalParams: any[]): void;
+  info(message?: any, ...optionalParams: any[]): void;
+  warn(message?: any, ...optionalParams: any[]): void;
+  error(message?: any, ...optionalParams: any[]): void;
 
-  log(level: LogLevel, ...message: any[]): void;
+  log(level: LogLevel, message: any, ...optionalParams: any[]): void;
 }

@@ -6,12 +6,13 @@ export class PrefixDateLogger extends AbstractLogLevelLogger implements LoggerIn
 
   constructor(private readonly logger: LoggerInterface,
               private readonly format: string = 'L LTS',
+              private readonly separator: string = ':',
               private readonly now: () => Moment = () => moment()) {
     super();
   }
 
-  public log(level: LogLevel, ...message: any[]): void {
-    this.logger.log(level, ...[this.formatDate(), ':', ...message]);
+  public log(level: LogLevel, message?: any, ...optionalParams: any[]): void {
+    this.logger.log(level, this.formatDate() + this.separator + message, ...optionalParams);
   }
 
   private formatDate(): string {

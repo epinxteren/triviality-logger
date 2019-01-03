@@ -7,11 +7,11 @@ export class FromLogLevelLogger extends AbstractLogLevelLogger implements Logger
     super();
   }
 
-  public log(level: LogLevel, ...message: any[]): void {
+  public log(level: LogLevel, message?: any, ...optionalParams: any[]): void {
     if (this.logFrom > level) {
       return;
     }
-    this.logger.log.apply(this.logger, [level, ...message]);
+    this.logger.log(level, message, ...optionalParams);
   }
 
 }
